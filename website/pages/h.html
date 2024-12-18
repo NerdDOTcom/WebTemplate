@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 10000px;
+            height: 100px;
+            position: relative;
+        }
+
+        #wc {
+
+            font-family: Papyrus;
+            font-size: 200%;
+        }
+
+        .buttonlg {
+            transition: transform 0.3s ease;
+            top: 10px;
+            position: absolute;
+            font-family: Arial;
+            font-size: larger;
+            font-weight: bolder;
+
+        }
+
+        #bs {
+            left: 10px;
+        }
+
+        #bss {
+            left: 110px;
+        }
+
+        .buttonlg:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wc"></div>
+    <button onclick="top.location.href = 'sgin.html'" class="buttonlg" id="bs">Sign up</button>
+    <button onclick="top.location.href = 'lgin.html'" class="buttonlg" id="bss">Log in</button>
+    
+    <script src="h.js"></script>
+</body>
+
+</html>

@@ -3,10 +3,76 @@
 
 <head>
   <title>Index Page</title>
+  <style>
+    body {
+      background-color: rgb(226, 195, 222);
+      position: relative;
+
+    }
+
+    #wc {
+      font-size: 200%;
+      font-family: papyrus;
+      font-style: italic;
+    }
+
+    #sprite1 {
+      top: 300px;
+      left: 200px;
+      width: 300px;
+      position: absolute;
+      z-index: 2;
+    }
+
+    #sprite2 {
+      top: 280px;
+      left: 1000px;
+      width: 300px;
+      position: absolute;
+      z-index: 2;
+    }
+
+    #bgf {
+      top: 50px;
+      left: 100px;
+      width: 1200px;
+      position: absolute;
+      z-index: 1;
+    }
+
+    #n {
+      top: 150px;
+      left: 9800px;
+      width: 200px;
+      position: absolute;
+    }
+
+    #bean {
+      transition: transform 0.3s ease;
+      width:50px;
+      z-index: 3;
+      position: absolute;
+      top:550px;
+      left:600px;
+    }
+
+    #bean:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
 
 <body>
-  <h1>The main page of the website</h1>
+  <iframe src="h.html"></iframe>
+
+  <img src="Home-PNG-Pic.png" id="sprite1">
+  <img src="house-png-transparent-25.png" id="sprite2">
+  <img src="transparent-trees-19.png" id="bgf">
+  <img src="Chicken-Nuggets.png" id="n">
+  <a href = "pray.html">
+  <img src="beans-transparent-2.png" id="bean">
+  </a>
+  <script type="module" src="index.js"></script>
 </body>
 
 </html>
