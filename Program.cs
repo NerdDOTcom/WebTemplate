@@ -79,6 +79,7 @@ class Program
             (string uni, string ei) = request.GetBody<(string, string)>();
             username = [.. username, uni];
             email = [.. email, ei];
+            scores = [.. scores, 0];
             id = [.. id, Guid.NewGuid().ToString()];
             Console.WriteLine("Got:" + uni + ei);
             response.Send("succsefully signed in");
@@ -94,14 +95,27 @@ class Program
               }
             }
           }
-          else if(request.Path == "sco") 
+          else if (request.Path == "sco")
           {
-             (int score, string urid) = request.GetBody<(int,string)>(); 
-             for (int i = 0; i < id.Length; ++i)
+            (string urid, int score) = request.GetBody<(string, int)>();
+            for (int i = 0; i < id.Length; ++i)
             {
               if (id[i] == urid)
               {
-                response.Send(scores[i]+score);
+                scores[i] += score;
+                response.Send(scores[i]);
+              }
+            }
+          }
+          else if(request.Path == "tempsco")
+          {
+            (string urid, int score) = request.GetBody<(string, int)>();
+            for (int i = 0; i < id.Length; ++i)
+            {
+              if (id[i] == urid)
+              {
+                scores[i] += 1;
+                response.Send(scores[i]);
               }
             }
           }

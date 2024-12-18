@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>Get the bean</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get the Bean</title>
     <style>
         body {
             margin: 0;
@@ -19,26 +21,27 @@
 
         #bean {
             position: absolute;
-            /* Fix typo in 'position' */
             width: 20px;
             height: 20px;
             background-color: rgb(110, 72, 38);
         }
 
         #score {
-            top: 1000px;
-            left: 0px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div id="score"></div>
+    <a href = "index.html">Home</a>
+    <div id="score">Score: 0</div>
     <div id="bean"></div>
     <div id="player"></div>
-    <a href="index.html"> go back</a>
-    <script>
-    </script>
+    <script type="module" src="pray.js"></script>
 </body>
 
 </html>
