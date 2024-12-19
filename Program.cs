@@ -107,7 +107,7 @@ class Program
               }
             }
           }
-          else if(request.Path == "tempsco")
+          else if (request.Path == "tempsco")
           {
             (string urid, int score) = request.GetBody<(string, int)>();
             for (int i = 0; i < id.Length; ++i)
@@ -119,6 +119,18 @@ class Program
               }
             }
           }
+          else if (request.Path == "lgout")
+          {
+            string urid = request.GetBody<string>();
+            for (int i = 0; i < id.Length; ++i)
+            {
+              if (id[i] == urid)
+              {
+                response.Send(urid);
+              }
+            }
+          }
+
         }
         catch (Exception exception)
         {
