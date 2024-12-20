@@ -56,12 +56,13 @@ class Program
           }
           else if (request.Path == "in")
           {
+            (string h, string hh) = request.GetBody<(string, string)>();
             string urid = "";
             p = false;
             for (int i = 0; i < username.Length; ++i)
             {
               Console.WriteLine(username[i] + ", " + email[i]);
-              (string h, string hh) = request.GetBody<(string, string)>();
+
               if (h == username[i] && hh == email[i])
               {
                 p = true;
