@@ -36,9 +36,22 @@ class Program
       {
         try
         {
-          /*──────────────────────────────────╮
-          │ Handle your custome requests here │
-          ╰──────────────────────────────────*/
+          switch(request.Path)
+          {
+            case "signup":
+            {
+              // check if user doesn't exist 
+              //if yes
+              //add user to data base
+              //else 
+              //return failed 
+              break;
+            }
+            case "login":
+            {
+              break;
+            }
+          }
           response.SetStatusCode(405);
 
           database.SaveChanges();
