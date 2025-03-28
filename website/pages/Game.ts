@@ -1,5 +1,5 @@
 let heart = document.getElementById("heart") as HTMLDivElement;
-let speed = 5;
+let speed = 7;
 
 
 let x = 0;

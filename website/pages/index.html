@@ -1,119 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html id="background">
 
 <head>
-<<<<<<< HEAD
-  <title>Index Page</title>
-  <style>
-    h1
-    {
-      font-family: 'Courier New', Courier, monospace;
-=======
-  <title>Welcome!</title>
-  <style>
-    body {
-      background-color: rgb(226, 195, 222);
-      position: relative;
+    <title>Bullet Hell</title>
+    <style>
+        #Thelinks {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            gap: 70px;
+        }
 
-    }
-    iframe{
-      z-index: 1000;
-      position: absolute;
-      
-    }
+        body {
+            position: relative;
+            background-color: yellow;
+        }
 
-    #wc {
-      font-size: 200%;
-      font-family: papyrus;
-      font-style: italic;
-    }
+        #cube_contain {
+            display: flex;
+            flex-direction: row-reverse;
+            width: 100px;
+            height: 100px;
+            perspective: 600px;
+            /* margin-left: 800px; */
+            position: absolute;
+            bottom: 50px;
+            right: 60px;
+            background-color: blue;
+        }
 
-    #sprite1 {
-      top: -100px;
-      left: -100px;
-      width: 300px;
-      height: 1000px;
-      position: absolute;
-      z-index: 2;
-    }
+        #cube {
+            width: 100%;
+            height: 100%;
+            /* position: relative; */
+            transform-style: preserve-3d;
+        }
 
-    #sprite2 {
-      top: -300px;
-      left: 1300px;
-      width: 300px;
-      height: 1200px;
-      position: absolute;
-      z-index: 2;
-    }
 
-    #bgf {
-      top: 300px;
-      left: 00px;
-      width: 1400px;
-      position: absolute;
-      z-index: 1;
-    }
+        #background {
+            background-color: black;
+        }
 
-    #n {
-      top: 150px;
-      left: 9800px;
-      width: 200px;
-      position: absolute;
-    }
+        body {
+            perspective: 600px;
+        }
 
-    #bean {
-      transition: transform 0.3s ease;
-      width:50px;
-      z-index: 3;
-      position: absolute;
-      top:400px;
-      left:450px;
-    }
+        @keyframes spinfront {
 
-    #bean:hover {
-      transform: scale(1.1);
-    }
-    #tico
-    {
-      transition: transform 0.3s ease;
-      width:50px;
-      z-index: 3;
-      position: absolute;
-      top:430px;
-      left:875px;
-    }
-    #tico:hover
-    {
-      transform: scale(1.1);
->>>>>>> 3baffa036b8f46300d2281b1901928a3e6fc6dd5
-    }
-  </style>
+            0% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spinback {
+
+            0% {
+                transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(360deg) rotateY(540deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spinleft {
+
+            0% {
+                transform: rotateX(0deg) rotateY(-90deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(360deg) rotateY(270deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spinright {
+
+            0% {
+                transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(360deg) rotateY(450deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spintop {
+
+            0% {
+                transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(450deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spinbottom {
+
+            0% {
+                transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+
+
+            100% {
+                transform: rotateX(270deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        .im {
+            position: absolute;
+            animation-duration: 2s;
+
+            /* margin-top: 100px;
+            margin-left: 100px; */
+            width: 100px;
+            height: 100px;
+
+            animation-iteration-count: infinite;
+
+        }
+
+        .aa {
+            text-decoration: none;
+            font-size: 50px;
+
+            text-align: center;
+            background-color: rgb(27, 27, 27);
+
+            color: white;
+            width: 40%;
+        }
+
+        #front {
+            animation-name: spinfront;
+            transform: rotateY(0deg);
+        }
+
+        #right {
+            margin-left: -50px;
+            animation-name: spinright;
+            transform: rotateY(90deg);
+        }
+
+        #left {
+            animation-name: spinleft;
+            margin-left: 50px;
+            transform: rotateY(-90deg);
+        }
+
+        #back {
+            animation-name: spinback;
+            transform: rotateY(180deg);
+        }
+
+        #bottom {
+            margin-top: 50px;
+            animation-name: spinbottom;
+            transform: rotateX(-90deg);
+        }
+
+        #top {
+            margin-top: -50px;
+            animation-name: spintop;
+            transform: rotateX(90deg);
+
+        }
+
+
+
+        #titles {
+            font-size: 50px;
+
+            text-align: center;
+            background-color: rgb(27, 27, 27);
+
+            color: white;
+            width: 40%;
+
+        }
+        
+    </style>
 </head>
 
 <body>
-<<<<<<< HEAD
-  <h1>The main page of the website</h1>
-  <h2>H2</h2>
-  <a href = "bla.html">here is a sperate page</a>
-  <a href = "down.html">This is the login and signup page</a>
-  <br>
-  <img src= "chipi.jpg">
-=======
-  <iframe id = "x"  src="h.html"></iframe>
+    <div id="Thelinks">
+        <h1 id="titles">𝐵𝒰𝐿𝐿𝐸𝒯 𝐻𝐸𝐿𝐿</h1>
+        <a class="aa" href="Game.html" >
+            𝒫𝐿𝒜𝒴
+        </a>
 
-  <img src="Home-PNG-Pic.png" id="sprite1">
-  <img src="house-png-transparent-25.png" id="sprite2">
-  <img src="rb_94488.png" id="bgf">
-  <img src="Chicken-Nuggets.png" id="n">
-  <a href = "pray.html">
-  <img src="beans-transparent-2.png" id="bean">
-  </a>
-  <a href = "tic.html">
-    <img src=  "R.png" id = "tico"> 
-  </a>
-  <script type="module" src="index.js"></script>
-  
->>>>>>> 3baffa036b8f46300d2281b1901928a3e6fc6dd5
+        <a class="aa" href="settings.html">
+            𝒮𝐸𝒯𝒯𝐼𝒩𝒢𝒮
+        </a>
+
+        <a class="aa" href="down.html">
+            𝒮𝐼𝒢𝒩𝒰𝒫/𝐿𝒪𝒢𝐼𝒩
+        </a>
+
+    </div>
+    <!-- <div id="x"> -->
+    <div id="cube_contain">
+        <div id="cube">
+            <img class="im" id="front" src="chipi.jpg">
+            <img class="im" id="back" src="chipi.jpg">
+            <img class="im" id="right" src="chipi.jpg">
+            <img class="im" id="left" src="chipi.jpg">
+            <img class="im" id="bottom" src="chipi.jpg">
+            <img class="im" id="top" src="chipi.jpg">
+        </div>
+    <!-- </div> -->
+    </div>
+
+    <script type="module" src="index.js"></script>
 </body>
 
 </html>

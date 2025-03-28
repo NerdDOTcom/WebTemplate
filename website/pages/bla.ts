@@ -1,5 +1,5 @@
 const idd = document.getElementById("idd") as HTMLAnchorElement;
-window.onload= function()
-{
+
+document.addEventListener('DOMContentLoaded', function() {
     idd.click();
-} // why doesn't work
+});
