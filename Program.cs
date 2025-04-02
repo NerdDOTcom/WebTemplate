@@ -1,5 +1,7 @@
 ﻿﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Numerics;
+using System.Runtime.InteropServices.Marshalling;
 using Microsoft.EntityFrameworkCore;
 
 class Program
@@ -46,6 +48,17 @@ class Program
           {
             case "signup":
             {
+              var(send_user,send_pass) = request.GetBody<(string,string)>();
+              var w = database.Users.FirstOrDefault(r=> r.Username == send_user && r.Password == send_pass);
+              if(w ==null)
+              {
+                response.Send("Bro did you just signup for a bullet hell game website?");
+                database.Users.Add(new User(send_user,send_pass));
+              }
+              else
+              {
+                response.Send("this user already exists, ngl, I ain't giving you the joy of doing this auto, go click the login button and suffer");
+              }
               // check if user doesn't exist 
               //if yes
               //add user to data base
@@ -55,14 +68,21 @@ class Program
             }
             case "login":
             {
-              //check if user exists 
-              //if yes,
-              // give id 
-              // else 
-              // say user doesn't exist 
+              var(send_user,send_pass) = request.GetBody<(string,string)>();
+              var w = database.Users.FirstOrDefault(r=> r.Username == send_user && r.Password == send_pass);
+              if(w ==null)
+              {
+                response.Send("empty");
+              }
+              else
+              {
+                response.Send(w.Id);
+              }
+              
               break;
             }
           }
+          database.SaveChanges();
         }
         catch (Exception exception)
         {
