@@ -1,21 +1,39 @@
-import {Number2, Circle, isColliding } from "../funcs";
+import { Number2, Circle, isColliding, Entity, move, updateEntities } from "../funcs";
 
-let heart = document.getElementById("heart") as HTMLDivElement;
 let speed = 10;
-let e_attack = document.querySelector(".E_attack") as HTMLDivElement;
-let sin_attack = document.querySelector(".Sin_attack") as HTMLDivElement;
 
-// sin_attack.style.transform =`translate(${500}px, ${500}px)`;
-let x_sin_attack = 10;
-let y_sin_attack = 1000*Math.random();
-let x_E_attack = 10;
-let y_E_attack = 1000 * Math.random();
-let x = 0;
-let y = 0;
-let heart_pos : Number2 = {x : x, y:y };
-let E_attack_pos : Number2 = {x : x_E_attack, y:y_E_attack };
-let E_sin_pos : Number2 = {x : x_sin_attack, y:y_sin_attack };
-let attack_pos = [E_attack_pos, E_sin_pos];
+// Creating the entities
+//=======================
+let heart: Entity =
+{
+    div: document.getElementById("heart") as HTMLDivElement,
+    circle: 
+    {
+        pos: {x: 1000, y:500},
+        r:10
+    }
+}
+let eEnemy: Entity = {
+    div: document.querySelector(".E_attack") as HTMLDivElement,
+    circle: {
+        pos: { x: 10, y: 800 * Math.random() },
+        r: 10
+    }
+};
+let sinEnemy: Entity = {
+    div: document.querySelector(".Sin_attack") as HTMLDivElement,
+    circle: {
+        pos: { x: 10, y: 800 * Math.random() },
+        r: 10
+    }
+}
+
+// making the enemies array
+//==========================
+let enemies: Entity[] = [eEnemy, sinEnemy];
+
+// making the keys map
+//=====================
 let keys = new Map<string, boolean>([
     ["ArrowRight", false],
     ["ArrowLeft", false],
@@ -24,6 +42,8 @@ let keys = new Map<string, boolean>([
     ["p", false]
 ]);
 
+// setting the values for whether a key is up or down
+//====================================================
 window.onkeydown = function (e) {
     for (let [keyName] of keys) {
         if (e.key == keyName) {
@@ -31,7 +51,6 @@ window.onkeydown = function (e) {
         }
     }
 };
-
 window.onkeyup = function (e) {
     for (let [keyName] of keys) {
         if (e.key == keyName) {
@@ -40,10 +59,11 @@ window.onkeyup = function (e) {
     }
 };
 
+// update function
+//=================
 function update() {
     if (keys.get("p")) {
         alert("Paused");
-        keys.set("p", false)
     }
 
     let dirX = 0;
@@ -59,62 +79,40 @@ function update() {
         let addX = Math.cos(angle);
         let addY = Math.sin(angle);
 
-        x += addX * speed;
-        y += addY * speed;
+        move(heart, {x: addX * speed, y: addY * speed});
     }
-    for(let i =0; i <attack_pos.length; ++i)
-    {
-        // console.log("x: ", attack_pos[i].x);
-        if(attack_pos[i].x> 2000)
-        {
-            attack_pos[i].x = 10;
-            attack_pos[i].y = 1000*Math.random();
-            // console.log("ininininin");
+
+    for (let i = 0; i < enemies.length; ++i) {
+        if (enemies[i].circle.pos.x > 2000) {
+            enemies[i].circle.pos.x = 10;
+            enemies[i].circle.pos.y = 800 * Math.random();
         }
     }
-    // if (x_E_attack > 2000) {
-    //     x_E_attack = 10;
-    //     y_E_attack = 1000 * Math.random();
-    // }
-    // if(x_sin_attack > 2000)
-    // {
-    //     x_sin_attack =10;
-    //     y_sin_attack = 1000*Math.random();
-    // }
-    
-    if (x > 1500) {
-        x = 1500;
-    }
-    else if (x < 700) {
-        x = 700;
-    }
-    if (y > 780) {
-        y = 780;
-    }
-    if (y < 100) {
-        y = 100;
-    }
-    attack_pos[1].x += 2;
-    attack_pos[1].y += Math.sin(attack_pos[1].x/20)*10;
-    // console.log(attack_pos[1].x);
-    attack_pos[0].x += 2;
-    // move(sin_attack, attack_pos[0]);
-    sin_attack.style.transform =`translate(${attack_pos[1].x}px, ${attack_pos[1].y}px)`;
-    e_attack.style.transform = `translate(${attack_pos[0].x}px, ${attack_pos[0].y}px)`;
-    heart.style.transform = `translate(${x}px, ${y}px)`;
 
-    let heartCircle: Circle = {pos: {x: x, y: y}, r: 10};
-    let E_attack_Circle : Circle = {pos: attack_pos[0], r:10};
-    let sin_attack_Circle :Circle= {pos: attack_pos[1], r:10};
-    let attacks_Circle= [E_attack_Circle,sin_attack_Circle];
-    for(let i =0; i < attacks_Circle.length; ++i)
-    {
-        if(isColliding(heartCircle, attacks_Circle[i]))
-            {
-                alert("need to reset here");
-            } 
+    if (heart.circle.pos.x > 1500) {
+        heart.circle.pos.x = 1500;
     }
-    
+    if (heart.circle.pos.x < 700) {
+        heart.circle.pos.x = 700;
+    }
+    if (heart.circle.pos.y > 780) {
+        heart.circle.pos.y = 780;
+    }
+    if (heart.circle.pos.y < 100) {
+        heart.circle.pos.y = 100;
+    }    
+
+    move(eEnemy, { x: 5, y: 0 });
+    move(sinEnemy, { x: 5, y: Math.sin(sinEnemy.circle.pos.x / 50) * 10 })
+
+
+    for (let i = 0; i < enemies.length; ++i) {
+        if (isColliding(heart.circle, enemies[i].circle)) {
+            alert("need to reset here");
+        }
+    }
+
+    updateEntities([heart, ...enemies]);
 }
 
 setInterval(update, 50 / 3); //60FPS
