@@ -3,6 +3,7 @@ let zim_text= document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
 let suare = document.getElementById("suare") as HTMLDivElement;
+let dead =false;
 // Creating the entities
 //=======================
 let heart: Entity =
@@ -16,12 +17,9 @@ let heart: Entity =
     // SpeedX: 0,
     speed:0
 }
-
-let w = create_GIR();
-let d=  create_GIR();
 // making the enemies array
 //==========================
-let enemies: Entity[] = [w,d];
+let enemies: Entity[] = [];
 
 // making the keys map
 //=====================
@@ -80,7 +78,7 @@ score += 1;
             enemies.push(create_GIR());
         }
     }
-     if(score%60 ==0)
+     if(score%60 ==0 && dead !=true)
      {
 
     
@@ -106,11 +104,14 @@ score += 1;
     {
         move(enemies[i], {x:  enemies[i].speed, y: 0})
     }
+    
     for (let i = 0; i < enemies.length; ++i) {
         if (isColliding(heart.circle, enemies[i].circle)) {
             zim_text.innerHTML = "Victory for ZIM!";
+            let dead = true;
             suare.innerHTML = "score:" + score.toString();
-            for(let i =0; i <enemies.length+1; ++i)
+            let w = enemies.length;
+            for(let i =0; i <w; ++i)
             {
                 delete_gir(enemies,0);
             }
