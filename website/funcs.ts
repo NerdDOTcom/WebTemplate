@@ -96,3 +96,25 @@ function typeOfMove() {
             return n;
     }
 }
+export function zim_dialog(score: number)
+{
+    switch (score)
+{
+    case 300: 
+    return "... you're not dead yet?";
+    case 600: 
+    return "Of course you're not! IRkens like to play with their food!";
+    case 900:
+        return "my plan is so briliant even I don't know the full extent of it!";
+    case 1200: 
+        return "...";
+    case 1500:
+        return "This is starting to get akward";
+    case 1800:
+        return "I guess this is the problem of being so amazing your plan never goes wrong";
+    default:
+        "GIR! kill the earth monkey!! faster!!";
+}
+
+
+}

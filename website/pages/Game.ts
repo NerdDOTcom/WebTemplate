@@ -1,21 +1,21 @@
-import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir } from "../funcs";
-let zim_text= document.getElementById("zim_text") as HTMLDivElement;
+import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog } from "../funcs";
+let zim_text = document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
 let suare = document.getElementById("suare") as HTMLDivElement;
-let dead =false;
+let dead = false;
 // Creating the entities
 //=======================
 let heart: Entity =
 {
     img: document.getElementById("heart") as HTMLImageElement,
-    circle: 
+    circle:
     {
-        pos: {x: 1000, y:500},
-        r:10
+        pos: { x: 1000, y: 500 },
+        r: 10
     },
     // SpeedX: 0,
-    speed:0
+    speed: 0
 }
 // making the enemies array
 //==========================
@@ -47,14 +47,18 @@ window.onkeyup = function (e) {
         }
     }
 };
-let score =0;
+let score = 0;
 // update function
 //=================
 function update() {
+    if (score % 300 == 0 && dead == false) {
+        zim_text.innerHTML = zim_dialog(score)!;
+    }
+
     if (keys.get("p")) {
         alert("Paused");
     }
-score += 1;
+    score += 1;
     let dirX = 0;
     let dirY = 0; // dvir I'm saying rn I don't remember all that mambo jumbo
     if (keys.get("ArrowRight")) dirX += 1;
@@ -68,25 +72,23 @@ score += 1;
         let addX = Math.cos(angle);
         let addY = Math.sin(angle);
 
-        move(heart, {x: addX * speed, y: addY * speed});
+        move(heart, { x: addX * speed, y: addY * speed });
+    }
+    for(let i =0; i < enemies.length; ++i)
+    {
+        if(enemies[i].circle.pos.x>=2000)
+        {
+            delete_gir(enemies,i);
+        }
     }
 
-    for (let i = 0; i < enemies.length; ++i) {
-        if (enemies[i].circle.pos.x > 2000) {
-            
-            delete_gir(enemies,i);
+    if (score % 60 == 0 && dead != true) {
+
+
+        for (let i = 0; i < score / 100; ++i) {
             enemies.push(create_GIR());
         }
     }
-     if(score%60 ==0 && dead !=true)
-     {
-
-    
-    for (let i =0; i < score/100; ++i)
-    {
-        enemies.push(create_GIR());
-    }
-     }
     if (heart.circle.pos.x > 1500) {
         heart.circle.pos.x = 1500;
     }
@@ -98,22 +100,20 @@ score += 1;
     }
     if (heart.circle.pos.y < 100) {
         heart.circle.pos.y = 100;
-    }    
-    // move(sinEnemy, { x: 5, y: Math.sin(sinEnemy.circle.pos.x / 50) * 10 })
-    for(let i =0; i <enemies.length; ++i)
-    {
-        move(enemies[i], {x:  enemies[i].speed, y: 0})
     }
-    
+    // move(sinEnemy, { x: 5, y: Math.sin(sinEnemy.circle.pos.x / 50) * 10 })
+    for (let i = 0; i < enemies.length; ++i) {
+        move(enemies[i], { x: enemies[i].speed, y: 0 })
+    }
+
     for (let i = 0; i < enemies.length; ++i) {
         if (isColliding(heart.circle, enemies[i].circle)) {
             zim_text.innerHTML = "Victory for ZIM!";
-            let dead = true;
+            dead = true;
             suare.innerHTML = "score:" + score.toString();
             let w = enemies.length;
-            for(let i =0; i <w; ++i)
-            {
-                delete_gir(enemies,0);
+            for (let i = 0; i < w; ++i) {
+                delete_gir(enemies, 0);
             }
             heart.img.remove();
         }
