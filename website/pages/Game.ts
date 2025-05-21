@@ -1,9 +1,11 @@
-import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog } from "../funcs";
+import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog} from "../funcs";
 let zim_text = document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
 let suare = document.getElementById("suare") as HTMLDivElement;
 let dead = false;
+//get settings out of data base 
+//set em
 // Creating the entities
 //=======================
 let heart: Entity =
@@ -14,6 +16,7 @@ let heart: Entity =
         pos: { x: 1000, y: 500 },
         r: 10
     },
+    movement: _ => 0,
     // SpeedX: 0,
     speed: 0
 }
@@ -74,11 +77,9 @@ function update() {
 
         move(heart, { x: addX * speed, y: addY * speed });
     }
-    for(let i =0; i < enemies.length; ++i)
-    {
-        if(enemies[i].circle.pos.x>=2000)
-        {
-            delete_gir(enemies,i);
+    for (let i = 0; i < enemies.length; ++i) {
+        if (enemies[i].circle.pos.x >= 2000) {
+            delete_gir(enemies, i);
         }
     }
 
@@ -103,7 +104,13 @@ function update() {
     }
     // move(sinEnemy, { x: 5, y: Math.sin(sinEnemy.circle.pos.x / 50) * 10 })
     for (let i = 0; i < enemies.length; ++i) {
-        move(enemies[i], { x: enemies[i].speed, y: 0 })
+        let enemy = enemies[i];
+        let newX = enemy.circle.pos.x + enemies[i].speed;
+        // move(enemies[i], { x: enemies[i].speed, y: enemies[i].movement() })
+        enemy.circle.pos = {
+            x: newX,
+            y: enemy.movement(newX)
+        };
     }
 
     for (let i = 0; i < enemies.length; ++i) {

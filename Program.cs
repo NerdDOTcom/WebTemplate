@@ -59,11 +59,12 @@ class Program
               {
                 response.Send("this user already exists, ngl, I ain't giving you the joy of doing this auto, go click the login button and suffer");
               }
-              // check if user doesn't exist 
-              //if yes
-              //add user to data base
-              //else 
-              //return failed 
+                // check if user doesn't exist 
+                //if yes
+                //add user to data base
+                //else 
+                //return failed 
+              
               break;
             }
             case "login":
@@ -78,7 +79,7 @@ class Program
               {
                 response.Send(w.Id);
               }
-              
+              //create a case for pulling out settings and putting in settings.
               break;
             }
           }
