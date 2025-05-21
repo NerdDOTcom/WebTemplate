@@ -32,12 +32,9 @@ export function create_GIR() {
         (x: number) => y + Math.cos(x / 100) * 50, // Cosine wave
         (x: number) => y + Math.tan(x / 300) * 20, // Tangent wave (be careful, can go infinite)
         (x: number) => y + Math.abs(Math.sin(x / 150)) * 80, // Bouncing sine wave
-        (x: number) => y + (x % 200) - 100, // Sawtooth pattern
-        (x: number) => y + ((x / 100) % 2 < 1 ? 50 : -50), // Square wave
-        (x: number) => y + Math.sin(x / 100) * Math.cos(x / 200) * 70, // Combined sine/cosine wave
         (x: number) => y + Math.sin(x / 50) * (x / 500), // Spiral-outward wave
-        (x: number) => y + 0.05 * x, // Diagonal upward movement
-        (x: number) => y - 0.05 * x, // Diagonal downward movement
+        (x: number) => y + 0.1 * x, // Diagonal upward movement
+        (x: number) => y - 0.1 * x, // Diagonal downward movement
         (x: number) => y + Math.sin(x / 50) * 20 + Math.sin(x / 200) * 50, // Superimposed sine waves
     ];
 

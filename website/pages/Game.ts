@@ -122,10 +122,17 @@ function update() {
             for (let i = 0; i < w; ++i) {
                 delete_gir(enemies, 0);
             }
-            heart.img.remove();
+            heart.img.style.opacity = "0";
+            // add score to leader board
+            score =-300;
         }
     }
-
+    if(dead == true && score == 0)
+    {
+        suare.innerHTML ="";
+        dead = false;
+        heart.img.style.opacity = "1";
+    }
     updateEntities([heart, ...enemies]);
 }
 
