@@ -1,4 +1,5 @@
 import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog} from "../funcs";
+import { send } from "../utilities";
 let zim_text = document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
@@ -59,6 +60,7 @@ function update() {
     }
 
     if (keys.get("p")) {
+        keys.set("p",false);
         alert("Paused");
     }
     score += 1;
@@ -123,7 +125,8 @@ function update() {
                 delete_gir(enemies, 0);
             }
             heart.img.style.opacity = "0";
-            // add score to leader board
+            
+             send("push_score",[score, ]) 
             score =-300;
         }
     }
