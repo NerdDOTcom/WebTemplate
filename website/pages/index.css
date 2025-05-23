@@ -4,6 +4,19 @@
             flex-direction: column;
             width: 100%;
             gap: 150px;
+            position: absolute;
+        }
+        #play 
+        {
+            margin-top: 15%;
+        }
+        #sett
+        {
+            margin-top: 25%;
+        }
+        #sign
+        {
+            margin-top: 35%;
         }
 
         body {
@@ -16,18 +29,6 @@
             font-weight: bolder;
         }
 
-        #cube_contain {
-            display: flex;
-            flex-direction: row-reverse;
-            width: 100px;
-            height: 100px;
-            perspective: 600px;
-            /* margin-left: 800px; */
-            position: absolute;
-            bottom: 50px;
-            right: 60px;
-            background-color: blue;
-        }
 
         #cube {
             width: 100%;
@@ -35,6 +36,8 @@
             /* position: relative; */
             transform-style: preserve-3d;
             background-color: greenyellow;
+            margin-left: 185%;
+            margin-top: 40%;
         }
 
 
@@ -44,6 +47,7 @@
 
         body {
             perspective: 600px;
+            position: relative;
         }
 
         @keyframes spinfront {
@@ -138,9 +142,10 @@
         }
 
         .aa {
+            position: absolute;
             text-decoration: none;
-            font-size: 80px;
-            height: 100px;
+            font-size: 100px;
+            height: 120px;
             text-align: center;
             background-color: rgb(27, 27, 27);
             font-family: main;
@@ -149,34 +154,40 @@
         }
 
         #front {
+            position: absolute;
             animation-name: spinfront;
             transform: rotateY(0deg);
         }
 
         #right {
+            position: absolute;
             margin-left: -50px;
             animation-name: spinright;
             transform: rotateY(90deg);
         }
 
         #left {
+            position: absolute;
             animation-name: spinleft;
             margin-left: 50px;
             transform: rotateY(-90deg);
         }
 
         #back {
+            position: absolute;
             animation-name: spinback;
             transform: rotateY(180deg);
         }
 
         #bottom {
+            position: absolute;
             margin-top: 50px;
             animation-name: spinbottom;
             transform: rotateX(-90deg);
         }
 
         #top {
+            position: absolute;
             margin-top: -50px;
             animation-name: spintop;
             transform: rotateX(90deg);
@@ -186,8 +197,9 @@
 
 
         #titles {
-            font-size: 80px;
-            height: 100px;
+            position: absolute;
+            font-size: 100px;
+            height: 120px;
             text-align: center;
             background-color: rgb(27, 27, 27);
             color: white;
@@ -196,9 +208,9 @@
         }
         #info
         {
-
-            margin-top: -150px;
-            margin-left: 50px;
+            position: absolute;
+            margin-top: 40%;
+            margin-left: 2%;
          height:100px;
          width: 100px;   
         }

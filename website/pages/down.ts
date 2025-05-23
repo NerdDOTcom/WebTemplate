@@ -11,5 +11,6 @@ signup.onclick = async function () {
 };
 login.onclick = async function () {
    let s = await send("login", [username.value, password.value]) as string;
+   localStorage.setItem("user_id",s);
    check.innerText = s;
 };

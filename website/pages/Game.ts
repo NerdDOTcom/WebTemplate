@@ -2,6 +2,7 @@ import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR,
 import { send } from "../utilities";
 let zim_text = document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
+let score_div = document.getElementById("score")as HTMLDivElement;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
 let suare = document.getElementById("suare") as HTMLDivElement;
 let dead = false;
@@ -119,24 +120,25 @@ function update() {
         if (isColliding(heart.circle, enemies[i].circle)) {
             zim_text.innerHTML = "Victory for ZIM!";
             dead = true;
-            suare.innerHTML = "score:" + score.toString();
+            
             let w = enemies.length;
             for (let i = 0; i < w; ++i) {
                 delete_gir(enemies, 0);
             }
             heart.img.style.opacity = "0";
             
-             send("push_score",[score, ]) 
+             send("push_score",[score, localStorage.getItem("user_id")]); 
             score =-300;
         }
     }
     if(dead == true && score == 0)
     {
-        suare.innerHTML ="";
+        
         dead = false;
         heart.img.style.opacity = "1";
     }
     updateEntities([heart, ...enemies]);
+    score_div.innerHTML ="score:" +score.toString();
 }
 
 setInterval(update, 50 / 3); //60FPS

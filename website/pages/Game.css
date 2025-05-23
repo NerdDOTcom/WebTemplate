@@ -60,3 +60,11 @@
             width: 40px;
             position: absolute;
         }
+        #score
+        {
+            color: white;
+             font-family: generica; 
+             font-size: 50px; 
+             position: absolute;
+             margin-top: 20px;
+        }

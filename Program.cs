@@ -17,7 +17,7 @@ class Program
 
     var database = new Database();
 
-    
+
 
 
     while (true)
@@ -44,46 +44,64 @@ class Program
           /*──────────────────────────────────╮
           │ Handle your custome requests here │
           ╰──────────────────────────────────*/
-          switch(request.Path)
+          switch (request.Path)
           {
             case "signup":
-            {
-              var(send_user,send_pass) = request.GetBody<(string,string)>();
-              var w = database.Users.FirstOrDefault(r=> r.Username == send_user && r.Password == send_pass);
-              if(w ==null)
               {
-                response.Send("Bro did you just signup for a bullet hell game website?");
-                database.Users.Add(new User(send_user,send_pass));
-              }
-              else
-              {
-                response.Send("this user already exists, ngl, I ain't giving you the joy of doing this auto, go click the login button and suffer");
-              }
+                var (send_user, send_pass) = request.GetBody<(string, string)>();
+                var w = database.Users.FirstOrDefault(r => r.Username == send_user && r.Password == send_pass);
+                if (w == null)
+                {
+                  response.Send("Bro did you just signup for a bullet hell game website?");
+                  database.Users.Add(new User(Guid.NewGuid().ToString(), send_user, send_pass));
+                }
+                else
+                {
+                  response.Send("this user already exists, ngl, I ain't giving you the joy of doing this auto, go click the login button and suffer");
+                }
                 // check if user doesn't exist 
                 //if yes
                 //add user to data base
                 //else 
                 //return failed 
-              
-              break;
-            }
+
+                break;
+              }
             case "login":
-            {
-              var(send_user,send_pass) = request.GetBody<(string,string)>();
-              var w = database.Users.FirstOrDefault(r=> r.Username == send_user && r.Password == send_pass);
-              if(w ==null)
               {
-                response.Send("empty");
+                var (send_user, send_pass) = request.GetBody<(string, string)>();
+                var w = database.Users.FirstOrDefault(r => r.Username == send_user && r.Password == send_pass);
+                if (w == null)
+                {
+                  response.Send("empty");
+                }
+                else
+                {
+                  response.Send(w.Id);
+                }
+                //create a case for pulling out settings and putting in settings.
+                break;
               }
-              else
+            case "push_score":
               {
-                response.Send(w.Id);
+                var (score, user_id) = request.GetBody<(int, string)>();
+                database.score_boards.Add(new score_board(score, user_id));
+                break;
               }
-              //create a case for pulling out settings and putting in settings.
-              break;
-            }
+            case "get_scores":
+              {
+                //gimme the entire data base, and set it to a veriable 
+                // for in length of the database 
+                // check who's bigger 
+                //set scores into new array length 10
+                //set userids into new array length 10 into with התאמה חח"ע 1->1
+                //return both array's who have the 10 largest numbers 
+                //figure out how to do that, because I'm stupid.
+                break;
+              }
           }
           database.SaveChanges();
+
         }
         catch (Exception exception)
         {
@@ -104,12 +122,12 @@ class Database() : DbBase("database")
   ╰──────────────────────────────*/
   public DbSet<User> Users { get; set; } = default!;
   public DbSet<Catagory> Catagories { get; set; } = default!;
-  public DbSet<Product> Products { get; set; } = default!;
+  public DbSet<score_board> score_boards { get; set; } = default!;
 }
 
-class User(string username, string password)
+class User(string id, string username, string password)
 {
-  [Key] public int Id { get; set; } = default!;
+  [Key] public string Id { get; set; } = id;
   public string Username { get; set; } = username;
   public string Password { get; set; } = password;
 }
@@ -120,11 +138,11 @@ class Catagory(string title)
   public string Title { get; set; } = title;
 }
 
-class Product(string name, int catagoryId)
+class score_board(int score, string userid)
 {
   [Key] public int Id { get; set; } = default!;
-  public string Name { get; set; } = name;
+  public int Score { get; set; } = score;
 
-  public int CatagoryId { get; set; } = catagoryId;
-  [ForeignKey("CatagoryId")] public Catagory Catagory { get; set; } = default!;
+  public string Userid { get; set; } = userid;
+  [ForeignKey("Userid")] public User User { get; set; } = default!;
 }
