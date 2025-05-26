@@ -1,8 +1,13 @@
 import { send } from "../utilities";
-
-let [score,userids] = await send("get_scores", []);
+let d = document.getElementById("d") as HTMLDivElement;
+let { scores, userids } = await send("get_scores", []);
+for(let i =0; i < 10|| i<scores.length; ++i)
+{
+    let username = await send("username", userids[i]) as string;
+    d.innerHTML += scores[i].toString()+ " "+ username+ "<br>";
+}
 //get the arrays 
-// create a list 
+// create a list n
 //for loop length 10
 // put the thingies in the list 
 // don't foget append child to body 

@@ -90,13 +90,18 @@ class Program
               }
             case "get_scores":
               {
-                //gimme the entire data base, and set it to a veriable 
-                // for in length of the database 
-                // check who's bigger 
-                //set scores into new array length 10
-                //set userids into new array length 10 into with התאמה חח"ע 1->1
-                //return both array's who have the 10 largest numbers 
-                //figure out how to do that, because I'm stupid.
+                var g = database.score_boards.OrderByDescending(r => r.Score);
+                var w = g.Select(r => r.Score).ToArray();
+                var z = g.Select(r => r.Userid).ToArray();
+                response.Send(new { scores = w, userids = z });
+                break;
+              }
+            case "username":
+              {
+                var userid  = request.GetBody<string>();
+                var the_user = database.Users.FirstOrDefault(r => r.Id == userid);
+                
+                response.Send(the_user.Username);
                 break;
               }
           }
