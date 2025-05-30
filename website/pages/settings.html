@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Settings</title>
-        <link rel="icon" type="image/x-icon" href="cogwheel(1).png">
-        <select id = "zim_select">
-            <option value = "1">zim</option>
-            <option value = "2">other zim</option>
-        </select>
-        <button id ="save">save</button>
+<link rel = "stylesheet" href = "settings.css">        
+        
     </head>
     <body>
+<title>Settings</title>
+        <link rel="icon" type="image/x-icon" href="cogwheel(1).png">
+        <select class = "span" id = "zim_select">
+            <option value = "1">zim</option>
+            <option value = "2">other zim</option>
+        </select><br>
+        <span id ="s1" class ="span">Number of frames before the start of a new round</span><br><input class ="span" id ="death_frame" type="number" min="0"><br>
+        <span id = "s2"class ="span">gir</span><br><input id ="gir" type = "checkbox"><br>
+        <button class ="span" id ="save">save</button>
+        <a id ="return" href= "index.html" class ="span">back</a>
+
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
         <script src = "settings.js" type="module"></script>
     </body>
 </html>

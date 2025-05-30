@@ -1,0 +1,63 @@
+body
+{
+    background-color: black;
+}
+
+.span
+{
+    position: absolute;
+    
+            text-decoration: none;
+            font-size: 20px;
+            height: 50px;
+            margin-left: 45%;
+            text-align: center;
+            
+            background-color: rgb(27, 27, 27);
+            font-family: zim_font;
+            color: white;
+            width: 10%;
+        
+}
+#save
+{
+    margin-top: 12%;
+    font-size: 40px;
+}
+#gir 
+{
+ position: absolute;
+    margin-top: 10%;
+            height: 2.3%;
+            width: 99.7%;
+           
+}
+#s1
+{
+    margin-top: 4%;
+    width:20%;
+    margin-left: 40%;
+}
+#return
+{
+    margin-top: 15%;
+}
+#s2
+{
+    margin-top: 8%;
+    font-size: 40px;
+}
+#zim_select
+{
+    margin-top: 2%;
+}
+#death_frame 
+{
+    margin-top: 6%;
+}
+@font-face{
+            font-family: zim_font;
+            src: url(batmfa__.ttf);
+            font-weight: bolder;
+        }
+        

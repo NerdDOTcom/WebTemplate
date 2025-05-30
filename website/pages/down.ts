@@ -1,4 +1,5 @@
 import { send } from "../utilities";
+import { sendEmail } from "./email";
 let username = document.getElementById("Username") as HTMLInputElement;
 let password = document.getElementById("Password") as HTMLInputElement;
 let signup = document.getElementById("signup") as HTMLButtonElement;
@@ -14,3 +15,5 @@ login.onclick = async function () {
    localStorage.setItem("user_id",s);
    check.innerText = s;
 };
+
+sendEmail();

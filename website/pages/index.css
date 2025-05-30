@@ -8,15 +8,19 @@
         }
         #play 
         {
-            margin-top: 15%;
+            margin-top: 12%;
         }
         #sett
         {
-            margin-top: 25%;
+            margin-top: 20%;
         }
         #sign
         {
-            margin-top: 35%;
+            margin-top: 28%;
+        }
+        #scoreboardy
+        {
+            margin-top: 36%;
         }
 
         body {
@@ -142,6 +146,7 @@
         }
 
         .aa {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: absolute;
             text-decoration: none;
             font-size: 100px;
@@ -152,6 +157,10 @@
             color: white;
             width: 40%;
         }
+        .aa:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 25px #8f9292, 0 0 40px #121114;
+}
 
         #front {
             position: absolute;

@@ -1,8 +1,9 @@
-import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog} from "../funcs";
+import { Number2, Circle, isColliding, Entity, move, updateEntities, create_GIR, delete_gir, zim_dialog } from "../funcs";
 import { send } from "../utilities";
 let zim_text = document.getElementById("zim_text") as HTMLDivElement;
 let speed = 10;
-let score_div = document.getElementById("score")as HTMLDivElement;
+let zim = document.getElementById("zim") as HTMLImageElement;
+let score_div = document.getElementById("score") as HTMLDivElement;
 zim_text.innerHTML = "Try to fight me earth monkey!<br> You won't last a second against ZIM!!!";
 let suare = document.getElementById("suare") as HTMLDivElement;
 let dead = false;
@@ -53,15 +54,25 @@ window.onkeyup = function (e) {
     }
 };
 let score = 0;
+if (localStorage.getItem("zim_sprite") == "2") {
+    zim.src = "zim.plotting.png";
+}
+else {
+    zim.src = "zim.yelling.png";
+}
 // update function
 //=================
 function update() {
+    if (localStorage.getItem("gir") == "true")
+    {
+        enemies.push(create_GIR());
+    }
     if (score % 300 == 0 && dead == false) {
         zim_text.innerHTML = zim_dialog(score)!;
     }
 
     if (keys.get("p")) {
-        keys.set("p",false);
+        keys.set("p", false);
         alert("Paused");
     }
     score += 1;
@@ -120,25 +131,28 @@ function update() {
         if (isColliding(heart.circle, enemies[i].circle)) {
             zim_text.innerHTML = "Victory for ZIM!";
             dead = true;
-            
+
             let w = enemies.length;
             for (let i = 0; i < w; ++i) {
                 delete_gir(enemies, 0);
             }
             heart.img.style.opacity = "0";
-            
-             send("push_score",[score, localStorage.getItem("user_id")]); 
-            score =-300;
+
+            send("push_score", [score, localStorage.getItem("user_id")]);
+            score = -300;
+            if (localStorage.getItem("death_frame") != null&&localStorage.getItem("death_frame") !="" ) {
+                score = -Number(localStorage.getItem("death_frame"));
+            }
+
         }
     }
-    if(dead == true && score == 0)
-    {
-        
+    if (dead == true && score == 0) {
+
         dead = false;
         heart.img.style.opacity = "1";
     }
     updateEntities([heart, ...enemies]);
-    score_div.innerHTML ="score:" +score.toString();
+    score_div.innerHTML = "score:" + score.toString();
 }
 
 setInterval(update, 50 / 3); //60FPS
