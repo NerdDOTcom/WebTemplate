@@ -1,35 +1,41 @@
-export async function sendEmail() {
-    let fileRes = (await (await fetch("secret.txt")).text()).split('\r\n');
+type Secret = {
+    serviceID: string,
+    templateID: string,
+    publicKey: string
+}
 
-    console.log(fileRes);
+export async function sendEmail(email: string) {
+    let w;
+    let secret = await (await fetch("secret.json")).json() as Secret;
+    if (email == null) {
+         w = 'iamanormalhumanboy@gmail.com';
+    }
+    else
+    {
+        w = email;
+    }
+    const url = 'https://api.emailjs.com/api/v1.0/email/send';
 
-    const serviceID = 'your_service_id';
-    const templateID = 'your_template_id';
-    const publicKey = 'your_public_key';
-
-    const templateParams = {
-        from_name: 'Your Name',
-        to_name: 'Recipient Name',
-        message: 'Hello, this is a test email from TypeScript!',
-        reply_to: 'you@example.com'
+    const data = {
+        service_id: secret.serviceID,
+        template_id: secret.templateID,
+        user_id: secret.publicKey,
+        template_params: {
+            from: 'Mike audience',
+            to: w,
+            title: 'First Message',
+            time: new Date(),
+            message: 'Hello!!!!!!!!!!!!!!'
+        }
     };
 
-    let response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            service_id: serviceID,
-            template_id: templateID,
-            user_id: publicKey,
-            template_params: templateParams
-        })
+        body: JSON.stringify(data)
     });
 
-    if (response.ok) {
-        alert('Email sent successfully!');
-    } else {
-        alert('Failed to send email.');
-    }
+    console.log(await response.text());
 }

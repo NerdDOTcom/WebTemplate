@@ -2,4 +2,5 @@ bin
 obj
 database.sqlite
 *.js
+*secret.json
 *secret.txt
