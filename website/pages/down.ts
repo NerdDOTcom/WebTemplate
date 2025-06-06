@@ -12,6 +12,7 @@ signup.onclick = async function () {
 };
 login.onclick = async function () {
    let s = await send("login", [username.value, password.value]) as string;
+   localStorage.setItem("userId",s);
    check.innerText = s;
    sendEmail(email.value);
 };

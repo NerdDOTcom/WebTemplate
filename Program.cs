@@ -85,6 +85,7 @@ class Program
             case "push_score":
               {
                 var (score, user_id) = request.GetBody<(int, string)>();
+                Console.WriteLine(user_id);
                 database.score_boards.Add(new score_board(score, user_id));
                 break;
               }
@@ -99,7 +100,7 @@ class Program
             case "username":
               {
                 var userid  = request.GetBody<string>();
-                var the_user = database.Users.FirstOrDefault(r => r.Id == userid);
+                var the_user = database.Users.FirstOrDefault(r => r.Id == userid)!;
                 
                 response.Send(the_user.Username);
                 break;

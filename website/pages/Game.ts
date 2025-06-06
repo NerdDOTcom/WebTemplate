@@ -138,7 +138,7 @@ function update() {
             }
             heart.img.style.opacity = "0";
 
-            send("push_score", [score, localStorage.getItem("user_id")]);
+            send("push_score", [score, localStorage.getItem("userId")]);
             score = -300;
             if (localStorage.getItem("death_frame") != null&&localStorage.getItem("death_frame") !="" ) {
                 score = -Number(localStorage.getItem("death_frame"));

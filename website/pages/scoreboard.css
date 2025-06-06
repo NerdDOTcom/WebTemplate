@@ -3,21 +3,37 @@ body {
             background-color: rgb(0, 0, 0);
             
         }
-        #d {
-            
+        .d {
+         position: absolute;   
          text-align: center;   
             font-size: 40px;
             font-family:zim_font;
             color: white;
             
         }
+        #score
+        {
+            position: absolute;
+            margin-left: 46%;
+        }
+        #user
+        {
+            position: absolute;
+            margin-left: 56%;
+        }
         #a 
         {
-            
+         margin-top: 20%;   
+         position: absolute;
             text-align: center;
             font-family: zim_font;
             color:rgb(208, 203, 234);
             font-size: 40px;
+        }
+        #e
+        {
+            position: absolute;
+            margin-left: 45%;
         }
         @font-face{
             font-family: zim_font;
