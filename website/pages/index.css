@@ -6,33 +6,36 @@
             gap: 150px;
             position: absolute;
         }
-        #play 
-        {
+
+        
+
+        #play {
             margin-top: 12%;
         }
-        #sett
-        {
+
+        #sett {
             margin-top: 20%;
         }
-        #sign
-        {
+
+        #sign {
             margin-top: 28%;
         }
-        #scoreboardy
-        {
+
+        #scoreboardy {
             margin-top: 36%;
         }
 
         body {
             position: relative;
             background-color: rgb(0, 0, 0);
+            cursor: url(e.cur), default;
         }
-        @font-face{
+
+        @font-face {
             font-family: main;
             src: url(batmfa__.ttf);
             font-weight: bolder;
         }
-
 
         #cube {
             width: 100%;
@@ -144,6 +147,9 @@
             animation-iteration-count: infinite;
 
         }
+        .im:hover{
+            cursor: url(d.cur),pointer;
+        }
 
         .aa {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -157,10 +163,12 @@
             color: white;
             width: 40%;
         }
+
         .aa:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 25px #8f9292, 0 0 40px #121114;
-}
+            transform: scale(1.2);
+            box-shadow: 0 0 25px #8f9292, 0 0 40px #121114;
+            cursor: url(d.cur),pointer;
+        }
 
         #front {
             position: absolute;
@@ -215,13 +223,15 @@
             width: 40%;
             font-family: main;
         }
-        #info
-        {
+
+        #info {
             position: absolute;
             margin-top: 40%;
             margin-left: 2%;
-         height:100px;
-         width: 100px;   
+            height: 100px;
+            width: 100px;
         }
-        
-   
+        #info:hover
+        {
+            cursor: url(d.cur),pointer;
+        }
